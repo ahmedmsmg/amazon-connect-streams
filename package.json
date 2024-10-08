@@ -1,0 +1,55 @@
+{
+  "name": "amazon-connect-streams",
+  "version": "2.12.0",
+  "description": "Amazon Connect Streams Library",
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "directories": {
+    "lib": "./release"
+  },
+  "files": [
+    "/release",
+    "/src/index.d.ts"
+  ],
+  "main": "release/connect-streams.js",
+  "types": "src/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amazon-connect/amazon-connect-streams.git"
+  },
+  "keywords": [
+    "streams",
+    "softphone",
+    "ringtone",
+    "connect"
+  ],
+  "scripts": {
+    "release": "npm run build-streams && npm run build-streams-dr && npm run test-mocha && npm run test-mocha-dr",
+    "build-streams": "webpack --config ./webpack/connect-streams.config.js && webpack --config ./webpack/connect-streams-min.config.js",
+    "build-streams-dr": "webpack --config ./webpack/connect-streams-dr.config.js && webpack --config ./webpack/connect-streams-dr-min.config.js",
+    "test-mocha": "nyc mocha \"test/unit/**/*.spec.js\" --ignore \"test/unit/drCoordinator/**\" --exit",
+    "test-mocha-dr": "nyc mocha \"test/unit/drCoordinator/*.spec.js\" --exit",
+    "clean": "rm -rf build/ node_modules build package-lock.json"
+  },
+  "author": "Amazon Web Services",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/amazon-connect/amazon-connect-streams/issues"
+  },
+  "homepage": "https://github.com/amazon-connect/amazon-connect-streams#readme",
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "jshint": "^2.13.6",
+    "mocha": "^10.2.0",
+    "mocha-jsdom": "^2.0.0",
+    "nyc": "^15.1.0",
+    "pump": "^3.0.0",
+    "sinon": "^12.0.0",
+    "terser-webpack-plugin": "^5.3.7",
+    "typescript": "^5.0.4",
+    "webpack": "^5.8.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-plugin-replace": "^1.2.0"
+  }
+}
